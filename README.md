@@ -26,18 +26,20 @@ Note that you can send *RKRequest* objects to arbitrary URL's by constructing th
 Dependencies
 -------------------------
 
-RestKit provides JSON parser implementations using SBJSON & YAJL. The recommended parser is YAJL (as it is known to be faster), but you can use the SBJSON backend instead by adding a dependency on libRestKitJSONParserSBJSON linking against libRestKitJSONParserSBJSON.a instead of the libRestKitJSONParserYAJL.a
+RestKit provides JSON parser implementations using SBJSON, YAJL & JSONKit. The recommended parser is JSONKit (as it is known to be faster), but you can use the YAJL or the SBJSON backend instead by adding the corresponding dependencies (libRestKitJSONParserSBJSON or libRestKitJSONParserYAJL instead of libRestKitJSONParserJSONKit). 
 
-The sources for SBJSON and YAJL are included in the Vendor/ subdirectory. The headers are copied into the RestKit headers path at build time and can be imported into your project via:
+The sources for SBJSON, YAJL and JSONKit are included in the Vendor/ subdirectory. The headers are copied into the RestKit headers path at build time and can be imported into your project via:
     #import <RestKit/Support/JSON/SBJSON/JSON.h>
     #import <RestKit/Support/JSON/YAJL/YAJL.h>
+    #import <RestKit/Support/JSON/JSONKit/JSONKit.h>
 
 Currently bundled version of these dependencies are:
 
 * **YAJLIOS** - 0.2.21
 * **SBJSON** - 2.3.1
+* **JSONKit** - 1.4
 
-If you currently link against or include SBJSON or YAJL in your project, you can disable the RKJSONParser targets and compile the appropriate RKJSONParser implementation directly into your application.
+If you currently link against or include SBJSON, YAJL or JSONKit in your project, you can disable the RKJSONParser targets and compile the appropriate RKJSONParser implementation directly into your application.
 
 XML parsing is not currently supported.
 
@@ -71,7 +73,7 @@ Quick Start (aka TL;DR)
     1. **libRestKitSupport.a**
     1. **libRestKitObjectMapping.a**
     1. **libRestKitNetwork.a**
-    1. A JSON parser implementation (either **libRestKitSBJSONParser.a** OR **libRestKitYAJLParser.a** but NOT both)
+    1. A JSON parser implementation (either **libRestKitJSONParserSBJSON.a** OR **libRestKitJSONParserYAJL.a** OR **libRestKitJSONParserJSONKit.a** but ONLY one of them)
 1. Import the RestKit headers via `#import <RestKit/RestKit.h>`
 1. Build the project to verify installation is successful.
     
@@ -82,7 +84,7 @@ To add RestKit to your project (you're using git, right?):
 
 1. Add the submodule: `git submodule add git://github.com/twotoasters/RestKit.git RestKit`
 1. Open RestKit.xcodeproj and drag the RestKit project file into your XCode project.
-1. Click on the entry for RestKit.xcodeproj in your project's **Groups & Files** section. In the right hand pane, find the entries for **libRestKitSupport.a** **libRestKitObjectMapping.a** **libRestKitNetwork.a** and **libRestKitJSONParserYAJL.a** and click the checkboxes on the far right underneath the silver target icon. This will link your project against RestKit. If you wish to use the Core Data support, click the checkbox next to **libRestKitCoreData.a** also.
+1. Click on the entry for RestKit.xcodeproj in your project's **Groups & Files** section. In the right hand pane, find the entries for **libRestKitSupport.a** **libRestKitObjectMapping.a** **libRestKitNetwork.a** and **libRestKitJSONParserJSONKit.a** and click the checkboxes on the far right underneath the silver target icon. This will link your project against RestKit. If you wish to use the Core Data support, click the checkbox next to **libRestKitCoreData.a** also.
 1. Look to the bottom of the **General** pane labeled **Linked Libraries**. You will need to add the following frameworks:
  * **CFNetwork.framework** - Required for networking support.
  * **SystemConfiguration.framework** - Required for detection of network availability.
@@ -127,7 +129,7 @@ To add RestKit to your project:
 1. In the **Target Dependencies** section, click the **+** button to open the Target selection sheet. Click on the **RestKit** aggregate target (it will have the bulls-eye icon) and click the **Add** button to create a dependency.
 1. In the **Link Binary with Libraries** section, click the **+** button to open the Library selection sheet. Here we need to instruct the target to link against all the required RestKit libraries and several system libraries. Select each of the following items (one at a time or while holding down the Command key to select all of them at once) and then click the **Add** button:
     * **libRestKitCoreData.a**
-    * **libRestKitJSONParserYAJL.a**
+    * **libRestKitJSONParserJSONKit.a**
     * **libRestKitNetwork.a**
     * **libRestKitObjectMapping.a**
     * **libRestKitSupport.a**

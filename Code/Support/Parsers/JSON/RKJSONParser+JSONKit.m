@@ -3,7 +3,7 @@
 //  RestKit
 //
 //  Created by Karim-Pierre Maalej on 21/03/11.
-//  Copyright 2011 Two Toasters. All rights reserved.
+//  Copyright 2011 Kypselia Software. All rights reserved.
 //
 
 #import "RKJSONParser.h"
